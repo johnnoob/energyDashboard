@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能源進出口數據管理報表 - Energy Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js and DataLabels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon"></div>
+                <h1>EnergyDash</h1>
+            </div>
+            
+            <div class="filters-container">
+                <h3>過濾條件 (Filters)</h3>
+                
+                <div class="filter-group">
+                    <label for="category-select">產品類別</label>
+                    <select id="category-select" class="custom-select">
+                        <option value="all">所有類別 (All Categories)</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="company-select">廠商名稱</label>
+                    <select id="company-select" class="custom-select">
+                        <option value="all">所有廠商 (All Companies)</option>
+                    </select>
+                </div>
+                
+                <button id="reset-filters" class="btn btn-secondary">重置過濾器 (Reset)</button>
+            </div>
+            
+            <div class="stats-summaries">
+                <div class="stat-card">
+                    <span class="stat-label">總數量 (Total Volume)</span>
+                    <h2 id="total-volume" class="stat-value">0</h2>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">數據筆數 (Records)</span>
+                    <h2 id="total-records" class="stat-value">0</h2>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-titles">
+                    <h2>能源數據即時分析看板</h2>
+                    <p>Interactive Energy Data Analytics Dashboard</p>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="btn btn-icon" title="Toggle Dark/Light Mode">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Trend Chart Container -->
+                <div class="chart-card chart-card-large fade-in">
+                    <div class="chart-header">
+                        <h3>每月走勢分析 (Monthly Trends)</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Products Distribution Chart Container -->
+                <div class="chart-card fade-in delay-1">
+                    <div class="chart-header">
+                        <h3>類別占比 (Category Breakdown)</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Companies Chart Container -->
+                <div class="chart-card fade-in delay-2">
+                    <div class="chart-header">
+                        <h3>廠商分析 (Company Comparison)</h3>
+                    </div>
+                    <div class="chart-body">
+                        <canvas id="companyChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Data Table -->
+                <div class="chart-card chart-card-large fade-in delay-3">
+                    <div class="chart-header">
+                        <h3>數據詳情 (Detail Data)</h3>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead id="data-table-head">
+                                <!-- Headers injected here by JS -->
+                            </thead>
+                            <tbody id="data-table-body">
+                                <!-- Data rows injected here by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
